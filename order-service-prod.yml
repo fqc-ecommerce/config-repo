@@ -1,0 +1,23 @@
+server:
+  port: ${SERVER_PORT:8083}
+
+spring:
+  datasource:
+    # Usamos la variable que definimos en el render.yaml (fromGroup: supabase-secrets)
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+  
+  flyway:
+    enabled: true
+    locations: classpath:db/migration/prod # Asumiendo que tienes migraciones para prod
+    baseline-on-migrate: true
+
+# URLs INTERNAS DE RENDER (Comunicación privada entre micros)
+# Usamos el nombre del servicio que pusimos en el render.yaml
+user:
+  service:
+    url: http://user-service:8081
+product:
+  service:
+    url: http://product-service:8082

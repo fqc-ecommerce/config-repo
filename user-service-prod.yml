@@ -1,0 +1,24 @@
+server:
+  port: ${SERVER_PORT:8081}
+
+spring:
+  datasource:
+    # Render inyectará estos valores desde el panel de "Environment Variables"
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+
+  flyway:
+    enabled: true
+    # Cambiamos a la ruta de prod si tus scripts de BD son distintos
+    locations: classpath:db/migration/dev
+    baseline-on-migrate: true
+    validate-on-migrate: true
+
+  jpa:
+    hibernate:
+      ddl-auto: validate # En prod es más seguro validar que actualizar
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
