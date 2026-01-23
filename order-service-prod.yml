@@ -3,17 +3,21 @@ server:
 
 spring:
   datasource:
-    # Usamos la variable que definimos en el render.yaml (fromGroup: supabase-secrets)
     url: ${SPRING_DATASOURCE_URL}
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
-  
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      connection-timeout: 30000
+      maximum-pool-size: 5
+
   flyway:
     enabled: true
-    user: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
+    default-schema: order_schema
+    create-schemas: true
     locations: classpath:db/migration/prod
     baseline-on-migrate: true
+    ignore-migration-locations: true
 
 # URLs INTERNAS DE RENDER (Comunicación privada entre micros)
 # Usamos el nombre del servicio que pusimos en el render.yaml
