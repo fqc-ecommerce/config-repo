@@ -7,18 +7,25 @@ spring:
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
     driver-class-name: org.postgresql.Driver
+    hikari:
+      # Útil para Neon: espera un poco más si la DB está "despertando"
+      connection-timeout: 30000
+      maximum-pool-size: 5
 
   jpa:
     hibernate:
       ddl-auto: none
     show-sql: false
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
 
   flyway:
     enabled: true
+    # Esto asegura que Flyway NO intente conectar sin password
+    user: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
     locations: classpath:db/migration/prod
     baseline-on-migrate: true
 
 jwt:
-  # Esta variable debe ser la misma que definas para el API Gateway en Render
   secret: ${JWT_SECRET}
   expiration: 3600000

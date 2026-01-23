@@ -11,10 +11,10 @@ spring:
 
   flyway:
     enabled: true
-    # Cambiamos a la ruta de prod si tus scripts de BD son distintos
-    locations: classpath:db/migration/dev
+    user: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    locations: classpath:db/migration/prod
     baseline-on-migrate: true
-    validate-on-migrate: true
 
   jpa:
     hibernate:

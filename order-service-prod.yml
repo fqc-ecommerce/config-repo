@@ -10,7 +10,9 @@ spring:
   
   flyway:
     enabled: true
-    locations: classpath:db/migration/prod # Asumiendo que tienes migraciones para prod
+    user: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    locations: classpath:db/migration/prod
     baseline-on-migrate: true
 
 # URLs INTERNAS DE RENDER (Comunicación privada entre micros)
