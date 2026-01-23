@@ -3,6 +3,12 @@ server:
 
 spring:
   cloud:
+    cloud:
+    config:
+    uri: ${SPRING_CLOUD_CONFIG_URI:lo_llama_del_orquestador_en_dev}
+    username: ${SPRING_CLOUD_CONFIG_USERNAME:admin}
+    password: ${SPRING_CLOUD_CONFIG_PASSWORD:admin}
+    fail-fast: true
     gateway:
       routes:
         # 1. AUTH SERVICE (PÚBLICO)
