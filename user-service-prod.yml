@@ -18,6 +18,7 @@ spring:
     locations: classpath:db/migration/prod
     baseline-on-migrate: true
     ignore-migration-locations: true
+    table: flyway_schema_history_user
 
   jpa:
     hibernate:
