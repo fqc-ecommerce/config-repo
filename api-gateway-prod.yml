@@ -7,13 +7,13 @@ spring:
       routes:
         # 1. AUTH SERVICE
         - id: auth-service
-          uri: http://auth-service:9000
+          uri: ${AUTH_SERVICE_URL:https://tu-auth-service.onrender.com}
           predicates:
             - Path=/auth/**
 
         # 2. USER SERVICE
         - id: user-service
-          uri: http://user-service:8081
+          uri: ${USER_SERVICE_URL:https://tu-user-service.onrender.com}
           predicates:
             - Path=/api/users/**
           filters:
@@ -21,7 +21,7 @@ spring:
 
         # 3. PRODUCT SERVICE
         - id: product-service
-          uri: http://product-service:8082
+          uri: ${PRODUCT_SERVICE_URL:https://tu-product-service.onrender.com}
           predicates:
             - Path=/api/products/**
           filters:
@@ -29,7 +29,7 @@ spring:
 
         # 4. ORDER SERVICE
         - id: order-service
-          uri: http://order-service:8083
+          uri: ${ORDER_SERVICE_URL:https://tu-order-service.onrender.com}
           predicates:
             - Path=/api/orders/**
           filters:
@@ -37,4 +37,3 @@ spring:
 
 jwt:
   secret: ${JWT_SECRET}
-  expiration: 3600000
