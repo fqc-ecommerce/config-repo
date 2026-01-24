@@ -3,20 +3,15 @@ server:
 
 spring:
   datasource:
-    url: ${SPRING_DATASOURCE_URL}
-    username: ${SPRING_DATASOURCE_USERNAME}
-    password: ${SPRING_DATASOURCE_PASSWORD}
+    url: ${USER_SERVICE_DB_URL}
+    username: ${USER_SERVICE_DB_USER}
+    password: ${USER_SERVICE_DB_PASS}
     driver-class-name: org.postgresql.Driver
-    hikari:
-      connection-timeout: 30000
-      maximum-pool-size: 5
-
-  # flyway:
-  #   enabled: false
-
   jpa:
     hibernate:
-      ddl-auto: update # En prod es más seguro validar que actualizar
+      ddl-auto: update
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
+  flyway:
+    enabled: true
