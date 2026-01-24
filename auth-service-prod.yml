@@ -3,7 +3,7 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://ep-silent-dawn-a4x7xqft-pooler.us-east-1.aws.neon.tech/authdb?sslmode=require
+    url: ${AUTH_SERVICE_DB_URL}
     username: ${SPRING_DATASOURCE_USERNAME}
     password: ${SPRING_DATASOURCE_PASSWORD}
     driver-class-name: org.postgresql.Driver
@@ -11,15 +11,14 @@ spring:
       connection-timeout: 30000
       maximum-pool-size: 5
 
-  flyway:
-    repair-on-migrate: true
-
   jpa:
     hibernate:
       ddl-auto: update
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
+  flyway:
+    enabled: true
 
 jwt:
   secret: ${JWT_SECRET}

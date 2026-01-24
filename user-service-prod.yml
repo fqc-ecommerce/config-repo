@@ -4,8 +4,8 @@ server:
 spring:
   datasource:
     url: ${USER_SERVICE_DB_URL}
-    username: ${USER_SERVICE_DB_USER}
-    password: ${USER_SERVICE_DB_PASS}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:

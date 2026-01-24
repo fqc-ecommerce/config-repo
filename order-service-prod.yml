@@ -3,7 +3,7 @@ server:
 
 spring:
   datasource:
-    url: ${SPRING_DATASOURCE_URL_ORDER}
+    url: ${SPRING_DATASOURCE_URL}
     username: ${SPRING_DATASOURCE_USERNAME}
     password: ${SPRING_DATASOURCE_PASSWORD}
     driver-class-name: org.postgresql.Driver
@@ -11,13 +11,14 @@ spring:
       connection-timeout: 30000
       maximum-pool-size: 5
 
-  # flyway:
-  #   enabled: true
-
   jpa:
     hibernate:
       ddl-auto: update
-    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  flyway:
+    enabled: true
 
 # URLs INTERNAS DE RENDER (Comunicación privada entre micros)
 # Usamos el nombre del servicio que pusimos en el render.yaml
