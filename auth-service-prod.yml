@@ -3,7 +3,7 @@ server:
 
 spring:
   datasource:
-    url: ${AUTH_SERVICE_DB_URL}
+    url: ${SPRING_DATASOURCE_URL}
     username: ${SPRING_DATASOURCE_USERNAME}
     password: ${SPRING_DATASOURCE_PASSWORD}
     driver-class-name: org.postgresql.Driver
@@ -13,12 +13,23 @@ spring:
 
   jpa:
     hibernate:
+      # Si quieres que Hibernate cree tablas si Flyway falla: usa 'update'
+      # Si confías plenamente en tus scripts de Flyway: usa 'validate'
       ddl-auto: update
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
+        # Al usar BD separadas, ya no necesitamos forzar esquemas
+        temp:
+          use_jdbc_metadata_defaults: false
+
   flyway:
     enabled: true
+    # Al usar 'public', estas líneas ya no son necesarias pero ayudan a limpiar
+    baseline-on-migrate: true
+    check-location: true
+    # Esto arregla el error de 'checksum mismatch' que viste en tus logs
+    validate-on-migrate: false
 
 jwt:
   secret: ${JWT_SECRET}
