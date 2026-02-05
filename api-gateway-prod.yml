@@ -2,23 +2,17 @@ server:
   port: ${PORT:8080}
 
 spring:
-  cloud:
-    config:
-    uri: ${SPRING_CLOUD_CONFIG_URI:http://localhost:8084}
-    username: ${SPRING_CLOUD_CONFIG_USERNAME:admin}
-    password: ${SPRING_CLOUD_CONFIG_PASSWORD:admin}
-    fail-fast: true
     gateway:
       routes:
         # 1. AUTH SERVICE
         - id: auth-service
-          uri: ${AUTH_SERVICE_URL:https://tu-auth-service.onrender.com}
+          uri: ${AUTH_SERVICE_URL:https://auth-service-swo5.onrender.com}
           predicates:
             - Path=/auth/**
 
         # 2. USER SERVICE
         - id: user-service
-          uri: ${USER_SERVICE_URL:https://tu-user-service.onrender.com}
+          uri: ${USER_SERVICE_URL:https://user-service-200f.onrender.com}
           predicates:
             - Path=/api/users/**
           filters:
