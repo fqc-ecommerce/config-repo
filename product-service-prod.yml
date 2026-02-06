@@ -13,12 +13,15 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: validate
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
   flyway:
     enabled: true
+    schemas: public
+    locations: classpath:db/migration/prod
+    baseline-on-migrate: true
 
 # CONFIGURACIÓN DE COMUNICACIÓN INTERNA
 # En Render, usamos el nombre del servicio definido en el render.yaml

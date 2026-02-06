@@ -19,6 +19,7 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
   flyway:
     enabled: true
+    schemas: public
 
 # URLs INTERNAS DE RENDER (Comunicación privada entre micros)
 # Usamos el nombre del servicio que pusimos en el render.yaml

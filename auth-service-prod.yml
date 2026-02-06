@@ -25,6 +25,7 @@ spring:
 
   flyway:
     enabled: true
+    schemas: public
     # Al usar 'public', estas líneas ya no son necesarias pero ayudan a limpiar
     baseline-on-migrate: true
     check-location: true
