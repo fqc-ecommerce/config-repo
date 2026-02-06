@@ -21,7 +21,7 @@ spring:
 
         # 3. PRODUCT SERVICE
         - id: product-service
-          uri: ${PRODUCT_SERVICE_URL:https://tu-product-service.onrender.com}
+          uri: ${PRODUCT_SERVICE_URL:https://product-service-dy93.onrender.com}
           predicates:
             - Path=/api/products/**
           filters:
@@ -29,7 +29,7 @@ spring:
 
         # 4. ORDER SERVICE
         - id: order-service
-          uri: ${ORDER_SERVICE_URL:https://tu-order-service.onrender.com}
+          uri: ${ORDER_SERVICE_URL:https://order-service-26fm.onrender.com}
           predicates:
             - Path=/api/orders/**
           filters:

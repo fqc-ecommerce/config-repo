@@ -24,7 +24,7 @@ spring:
 # Usamos el nombre del servicio que pusimos en el render.yaml
 user:
   service:
-    url: http://user-service:8081
+    uri: ${USER_SERVICE_URL:https://user-service-200f.onrender.com}
 product:
   service:
-    url: http://product-service:8082
+    uri: ${PRODUCT_SERVICE_URL:https://product-service-dy93.onrender.com}
