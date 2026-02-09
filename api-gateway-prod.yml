@@ -4,14 +4,35 @@ server:
 spring:
   cloud:
     gateway:
+      # --- 1. CONFIGURACIÓN DE TIMEOUTS (Para esperar a que Render despierte los MS) ---
+      httpclient:
+        connect-timeout: 30000        # 30 segundos para establecer conexión
+        response-timeout: 30s         # 30 segundos para esperar la respuesta del microservicio
+      
+      # --- 2. CONFIGURACIÓN DE CORS (Para permitir peticiones desde Vercel) ---
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: 
+              - "https://ecommerce-iota-taupe-12.vercel.app/"  # <--- REEMPLAZA CON TU URL REAL DE VERCEL
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - OPTIONS
+            allowedHeaders: "*"
+            allowCredentials: true
+
+      # --- 3. RUTAS DE LOS MICROSERVICIOS ---
       routes:
-        # 1. AUTH SERVICE
+        # AUTH SERVICE
         - id: auth-service
           uri: ${AUTH_SERVICE_URL:https://auth-service-swo5.onrender.com}
           predicates:
             - Path=/auth/**
 
-        # 2. USER SERVICE
+        # USER SERVICE
         - id: user-service
           uri: ${USER_SERVICE_URL:https://user-service-200f.onrender.com}
           predicates:
@@ -19,7 +40,7 @@ spring:
           filters:
             - AuthenticationFilter
 
-        # 3. PRODUCT SERVICE
+        # PRODUCT SERVICE
         - id: product-service
           uri: ${PRODUCT_SERVICE_URL:https://product-service-dy93.onrender.com}
           predicates:
@@ -27,7 +48,7 @@ spring:
           filters:
             - AuthenticationFilter
 
-        # 4. ORDER SERVICE
+        # ORDER SERVICE
         - id: order-service
           uri: ${ORDER_SERVICE_URL:https://order-service-26fm.onrender.com}
           predicates:
@@ -35,5 +56,6 @@ spring:
           filters:
             - AuthenticationFilter
 
+# --- 4. CONFIGURACIÓN EXTRA ---
 jwt:
   secret: ${JWT_SECRET}
